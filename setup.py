@@ -18,9 +18,9 @@ setup(
             "vibetest=vibetest.cli.cli:cli",
         ],
     },
-    author="VibeTest Contributors",
-    author_email="",
-    url="https://github.com/vibetest/vibetest",
+    author="AbhishekPurohit1",
+    author_email="Abhishekpurohit444@gmail.com",
+    url="https://github.com/AbhishekPurohit1/vibetest",
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
