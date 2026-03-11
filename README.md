@@ -24,11 +24,70 @@ Write tests using user intent.
 click("login")
 ```
 
+## 🌟 AI-Powered Features (v0.2+)
+
+### **Natural Language Understanding**
+```python
+# AI understands intent, not just text
+find_element_ai(page, "the blue login button on the right")
+```
+
+### **Intent Analysis**
+```python
+# AI parses: "click the blue login button"
+# → Target: "login"
+# → Position: "right" 
+# → Color: "blue"
+# → Confidence: 0.8
+```
+
+### **Synonym Recognition**
+```python
+# AI knows these are equivalent:
+click("login")      # ≈ click("sign in")
+click("register")   # ≈ click("sign up")
+click("search")     # ≈ click("find")
+```
+
+## 🚀 Advanced Automation Features
+
+### **Cross-Browser Testing**
+```python
+@cross_browser_test("My Test", [BrowserType.CHROME, BrowserType.FIREFOX])
+def my_test():
+    open_page("https://example.com")
+    click("button")
+```
+
+### **E2E Test Framework**
+```python
+test_suite = create_e2e_test("Complete User Journey")
+test_suite.step("Login", lambda: UserJourney.login_flow())
+test_suite.step("Navigate", lambda: UserJourney.navigation_flow())
+test_suite.run_all()
+```
+
+### **Smart Assertions**
+```python
+expect_page_title("Dashboard")
+expect_url("dashboard")
+wait_for_element("profile", timeout=5000)
+```
+
 ## Features
 
+### 🤖 AI Features (v0.2+)
+- 🧠 **Natural Language Understanding** - AI parses user intent
+- 🎯 **Context Awareness** - Understands position, color, descriptions
+- 📚 **Synonym Recognition** - "login" ≈ "sign in" ≈ "submit"
+- 📊 **Intent Confidence Scoring** - AI confidence levels
+- 🔍 **Semantic Matching** - Beyond text to meaning
+
+### 🚀 Automation Features
 - 🧠 **Smart locator engine** - Find elements by intent, not brittle XPath/CSS selectors
 - 🔄 **Self-healing elements** - Automatically adapts to UI changes
 - ✨ **Clean test DSL** - Write readable tests that anyone can understand
+- 🌐 **Cross-browser support** - Chrome, Firefox, Safari, Edge
 - 🖥️ **CLI test runner** - Run tests from command line
 - ⚡ **Built on Playwright** - Reliable browser automation under the hood
 
