@@ -67,6 +67,19 @@ test_suite.step("Navigate", lambda: UserJourney.navigation_flow())
 test_suite.run_all()
 ```
 
+### **Parallel Test Execution**
+```python
+# CLI Commands
+vibetest run tests                    # Sequential execution
+vibetest run tests --parallel 4       # Parallel with 4 workers
+vibetest run tests --parallel 8       # Parallel with 8 workers
+
+# Performance: 100 tests @ 30s each
+# Sequential: 50 minutes
+# Parallel (8 workers): ~7 minutes
+# 7x faster execution!
+```
+
 ### **Smart Assertions**
 ```python
 expect_page_title("Dashboard")
@@ -89,6 +102,9 @@ wait_for_element("profile", timeout=5000)
 - ✨ **Clean test DSL** - Write readable tests that anyone can understand
 - 🌐 **Cross-browser support** - Chrome, Firefox, Safari, Edge
 - 🖥️ **CLI test runner** - Run tests from command line
+- ⚡ **Parallel execution** - Run multiple tests simultaneously for 7x speed improvement
+- 🛡️ **Timeout protection** - Prevent hanging tests with 5-minute timeouts
+- 📊 **Performance metrics** - Detailed execution reporting and time savings
 - ⚡ **Built on Playwright** - Reliable browser automation under the hood
 
 ## Example

@@ -2,6 +2,7 @@ import os
 import subprocess
 
 import click
+from vibetest.core.runner import run_tests, run_tests_parallel
 
 
 @click.group()
@@ -12,23 +13,50 @@ def cli():
 
 @cli.command()
 @click.argument("path")
-def run(path):
-    """Run a single file or all .py files in a folder."""
-    # Set PYTHONPATH to include the current directory
-    env = {**os.environ, "PYTHONPATH": "/Users/apple/Desktop/All Data/VibeTest"}
+@click.option("--parallel", default=1, help="Number of parallel workers (default: 1)")
+def run(path, parallel):
+    """Run a single file or all .py files in a folder.
     
+    Examples:
+        vibetest run tests                    # Sequential execution
+        vibetest run tests --parallel 4       # Parallel execution with 4 workers
+        vibetest run examples/demo_test.py    # Single file
+    """
     if os.path.isfile(path):
+        # Run single file
+        print(f"[VibeTest] Running single file: {path}")
+        env = {**os.environ, "PYTHONPATH": "/Users/apple/Desktop/All Data/VibeTest"}
         result = subprocess.run(["python3", path], capture_output=True, text=True, env=env)
         print(result.stdout)
         if result.stderr:
             print(result.stderr)
     else:
-        for file in os.listdir(path):
-            if file.endswith(".py") and not file.startswith("__"):
-                print(f"\n[VibeTest] Running {file}")
-                print("-" * 40)
-                result = subprocess.run(["python3", f"{path}/{file}"], capture_output=True, text=True, env=env)
-                print(result.stdout)
-                if result.stderr:
-                    print(result.stderr)
+        # Run folder with parallel or sequential execution
+        if parallel > 1:
+            run_tests_parallel(path, workers=parallel)
+        else:
+            run_tests(path)
+
+
+@cli.command()
+@click.argument("folder")
+@click.option("--workers", default=4, help="Number of parallel workers (default: 4)")
+def parallel(folder, workers):
+    """Run tests in parallel mode.
+    
+    Example:
+        vibetest parallel tests --workers 8
+    """
+    run_tests_parallel(folder, workers=workers)
+
+
+@cli.command()
+@click.argument("folder")
+def sequential(folder):
+    """Run tests in sequential mode.
+    
+    Example:
+        vibetest sequential tests
+    """
+    run_tests(folder)
 
