@@ -26,11 +26,16 @@ class VibeTestRecorder:
         # Clean up common text
         text = text.strip().lower()
         
+        # Handle special cases first
+        if "submit" in text:
+            return "submit"
+        if "click" in text and "here" in text:
+            return "click_here"
+            
         # Convert to intent-based names
         synonyms = {
             "sign in": "login",
             "log in": "login", 
-            "submit": "login",
             "register": "signup",
             "sign up": "signup",
             "create account": "signup",
